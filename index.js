@@ -15,7 +15,7 @@ const TARGET_GROUP = "120363411068702486@g.us";
 // 🔢 تخزين الغيابات
 const absences = {};
 
-const qrcode = require('qrcode');
+
 
 client.on('qr', async (qr) => {
   console.log('QR RECEIVED');
