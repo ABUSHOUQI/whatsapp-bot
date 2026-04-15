@@ -1,5 +1,5 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode');
+const qrcodeTerminal = require('qrcode-terminal');
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -8,7 +8,6 @@ const client = new Client({
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   }
 });
-
 // 🎯 القروب المحدد
 const TARGET_GROUP = "120363411068702486@g.us";
 
@@ -16,14 +15,10 @@ const TARGET_GROUP = "120363411068702486@g.us";
 const absences = {};
 
 
-
-client.on('qr', async (qr) => {
-  console.log('QR RECEIVED');
-
-  const url = await qrcode.toDataURL(qr);
-  console.log(url);
+client.on('qr', (qr) => {
+    console.log('امسح الكود:');
+    qrcodeTerminal.generate(qr, { small: true });
 });
-
 client.on('ready', () => {
     console.log('🔥 البوت اشتغل!');
 });
