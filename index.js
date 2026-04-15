@@ -1,5 +1,5 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+const qrcode = require('qrcode');
 
 const client = new Client({
   authStrategy: new LocalAuth(),
@@ -15,9 +15,13 @@ const TARGET_GROUP = "120363411068702486@g.us";
 // 🔢 تخزين الغيابات
 const absences = {};
 
-client.on('qr', qr => {
-    console.log("📱 امسح الكود:");
-    qrcode.generate(qr, { small: true });
+const qrcode = require('qrcode');
+
+client.on('qr', async (qr) => {
+  console.log('QR RECEIVED');
+
+  const url = await qrcode.toDataURL(qr);
+  console.log(url);
 });
 
 client.on('ready', () => {
